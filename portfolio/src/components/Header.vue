@@ -5,11 +5,11 @@
     </div>
     <nav>
       <ul>
-        <li><a href="#home">home</a></li>
-        <li><a href="#about">about</a></li>
-        <li><a href="#projects">projects</a></li>
-        <li><a href="#skills">skills</a></li>
-        <li><a href="#contact">contact</a></li>
+        <li><a href="#home" @click="scrollToSection($event, 'home')">home</a></li>
+        <li><a href="#about" @click="scrollToSection($event, 'about')">about</a></li>
+        <li><a href="#projects" @click="scrollToSection($event, 'projects')">projects</a></li>
+        <li><a href="#skills" @click="scrollToSection($event, 'skills')">skills</a></li>
+        <li><a href="#contact" @click="scrollToSection($event, 'contact')">contact</a></li>
       </ul>
     </nav>
   </header>
@@ -18,17 +18,41 @@
 <script>
 export default {
   name: 'Header',
+  methods: {
+    scrollToSection(event, sectionId) {
+      event.preventDefault();
+
+      const targetSection = document.getElementById(sectionId);
+      const headerHeight = document.querySelector('header').offsetHeight;
+
+      if (targetSection) {
+        const sectionPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+
+        const offsetPosition = sectionPosition - headerHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    },
+  },
 };
 </script>
 
 <style>
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #333333;
-  width: 100%;
-  height: 80px;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header nav {
