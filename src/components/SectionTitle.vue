@@ -20,7 +20,7 @@ export default {
 <style scoped>
 .section-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .title {

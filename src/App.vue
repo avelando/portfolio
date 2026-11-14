@@ -5,7 +5,8 @@
     <AboutSection />
     <FormationSection />
     <ExperienceSection />
-    <ProjectsSection />
+    <SystemsSection />
+    <ResearchSection />
     <PublicationsSection />
     <SkillsSection />
     <ContactSection />
@@ -18,7 +19,8 @@ import HeroSection from '@/components/HeroSection.vue';
 import AboutSection from '@/components/AboutSection.vue';
 import FormationSection from '@/components/FormationSection.vue';
 import ExperienceSection from '@/components/ExperienceSection.vue';
-import ProjectsSection from '@/components/ProjectsSection.vue';
+import SystemsSection from '@/components/SystemsSection.vue';
+import ResearchSection from '@/components/ResearchSection.vue';
 import PublicationsSection from '@/components/PublicationsSection.vue';
 import SkillsSection from '@/components/SkillsSection.vue';
 import ContactSection from '@/components/ContactSection.vue';
@@ -31,7 +33,8 @@ export default {
     AboutSection,
     FormationSection,
     ExperienceSection,
-    ProjectsSection,
+    SystemsSection,
+    ResearchSection,
     PublicationsSection,
     SkillsSection,
     ContactSection,

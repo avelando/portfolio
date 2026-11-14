@@ -44,6 +44,7 @@ export default {
         { id: 'about', label: 'Sobre' },
         { id: 'formation', label: 'Formação' },
         { id: 'experience', label: 'Experiência' },
+        { id: 'systems', label: 'Sistemas' },
         { id: 'projects', label: 'Projetos' },
         { id: 'publications', label: 'Publicações' },
         { id: 'skills', label: 'Skills' },

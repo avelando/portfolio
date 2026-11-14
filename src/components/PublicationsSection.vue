@@ -17,7 +17,7 @@
       <div class="pub-list">
         <div
           class="pub-card"
-          v-for="(pub, index) in filteredPubs"
+          v-for="(pub, index) in visiblePubs"
           :key="index"
         >
           <div class="pub-index">
@@ -34,14 +34,28 @@
             <div class="pub-meta">
               <span class="pub-year">{{ pub.year }}</span>
               <span v-if="pub.pages" class="pub-pages">pp. {{ pub.pages }}</span>
+              <a v-if="pub.link" :href="pub.link" target="_blank" rel="noopener" class="pub-link">
+                &#9654; Acessar
+              </a>
             </div>
           </div>
         </div>
       </div>
 
+      <div class="show-more" v-if="filteredPubs.length > initialCount && !showAllPubs">
+        <button class="show-more-btn" @click="showAllPubs = true">
+          <span class="btn-icon">&#9660;</span> Ver mais publicações
+        </button>
+      </div>
+      <div class="show-less" v-if="showAllPubs && filteredPubs.length > initialCount">
+        <button class="show-more-btn" @click="showAllPubs = false">
+          <span class="btn-icon">&#9650;</span> Ver menos
+        </button>
+      </div>
+
       <div class="patents-section">
         <h3 class="patents-title">
-          <span class="patents-icon">&#9733;</span> Patentes de Software
+          <span class="patents-icon">&#9733;</span> Registros de Software
         </h3>
         <div class="patent-cards">
           <div class="patent-card" v-for="(patent, i) in patents" :key="i">
@@ -65,6 +79,8 @@ export default {
   data() {
     return {
       activePubFilter: 'all',
+      showAllPubs: false,
+      initialCount: 4,
       pubFilters: [
         { label: 'Todos', value: 'all' },
         { label: 'Completos', value: 'full' },
@@ -161,14 +177,17 @@ export default {
       if (this.activePubFilter === 'all') return this.publications;
       return this.publications.filter((p) => p.category === this.activePubFilter);
     },
+    visiblePubs() {
+      return this.showAllPubs ? this.filteredPubs : this.filteredPubs.slice(0, this.initialCount);
+    },
   },
 };
 </script>
 
 <style scoped>
 .publications {
-  padding: 6rem 2rem;
-  background: var(--bg-secondary);
+  padding: 4rem 2rem;
+  background: var(--bg-primary);
 }
 
 .container {
@@ -180,7 +199,7 @@ export default {
   display: flex;
   justify-content: center;
   gap: 0.8rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
@@ -205,7 +224,7 @@ export default {
 .pub-list {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1rem;
 }
 
 .pub-card {
@@ -213,7 +232,7 @@ export default {
   gap: 1.5rem;
   background: var(--bg-card);
   border: 2px solid rgba(233, 69, 96, 0.12);
-  padding: 1.5rem;
+  padding: 1.2rem;
   transition: all 0.3s ease;
 }
 
@@ -240,7 +259,7 @@ export default {
   font-size: 0.4rem;
   padding: 0.2rem 0.5rem;
   border: 2px solid;
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.6rem;
   display: inline-block;
 }
 
@@ -258,20 +277,20 @@ export default {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   line-height: 1.5;
 }
 
 .pub-authors {
   font-size: 0.8rem;
   color: var(--text-secondary);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
 
 .pub-venue {
   font-size: 0.8rem;
   color: var(--accent-purple);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   display: flex;
   align-items: flex-start;
   gap: 0.4rem;
@@ -287,6 +306,7 @@ export default {
   gap: 1rem;
   font-family: var(--font-pixel);
   font-size: 0.4rem;
+  align-items: center;
 }
 
 .pub-year {
@@ -297,8 +317,51 @@ export default {
   color: var(--text-muted);
 }
 
+.pub-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--accent-blue);
+  transition: all 0.3s ease;
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+}
+
+.pub-link:hover {
+  background: var(--accent-blue);
+  color: var(--bg-primary);
+}
+
+.show-more, .show-less {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.show-more-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  padding: 0.8rem 2rem;
+  background: transparent;
+  border: 2px solid var(--accent-pink);
+  color: var(--accent-pink);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.show-more-btn:hover {
+  background: var(--accent-pink);
+  color: #fff;
+}
+
+.btn-icon {
+  font-size: 0.4rem;
+}
+
 .patents-section {
-  margin-top: 4rem;
+  margin-top: 3rem;
 }
 
 .patents-title {

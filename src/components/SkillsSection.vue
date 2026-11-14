@@ -1,7 +1,7 @@
 <template>
   <section id="skills" class="skills">
     <div class="container">
-      <SectionTitle title="Skills" subtitle="Tecnologias e ferramentas" />
+      <SectionTitle title="Skills" subtitle="Baseado nos repositórios públicos do GitHub" />
 
       <div class="skills-grid">
         <div
@@ -19,20 +19,21 @@
               v-for="skill in cat.skills"
               :key="skill.name"
             >
-              <div class="skill-bar-wrapper">
+              <div class="skill-header">
                 <span class="skill-name">{{ skill.name }}</span>
-                <div class="skill-bar">
-                  <div
-                    class="skill-fill"
-                    :style="{ width: skill.level + '%', background: skill.color }"
-                  >
-                    <div class="pixel-blocks">
-                      <span
-                        v-for="n in Math.floor(skill.level / 10)"
-                        :key="n"
-                        class="pixel-block"
-                      ></span>
-                    </div>
+                <span class="skill-repos">{{ skill.repos }} repos</span>
+              </div>
+              <div class="skill-bar">
+                <div
+                  class="skill-fill"
+                  :style="{ width: skill.level + '%', background: skill.color }"
+                >
+                  <div class="pixel-blocks">
+                    <span
+                      v-for="n in Math.floor(skill.level / 10)"
+                      :key="n"
+                      class="pixel-block"
+                    ></span>
                   </div>
                 </div>
               </div>
@@ -40,6 +41,11 @@
           </div>
         </div>
       </div>
+
+      <p class="skills-note">
+        <span class="note-icon">&#9670;</span>
+        Nível baseado na frequência de uso nos repositórios públicos
+      </p>
     </div>
   </section>
 </template>
@@ -54,43 +60,41 @@ export default {
     return {
       categories: [
         {
-          name: 'Frontend',
-          icon: '▸',
+          name: 'Linguagens',
+          icon: '&#9654;',
           skills: [
-            { name: 'Next.js', level: 85, color: 'var(--accent-pink)' },
-            { name: 'Vue.js', level: 75, color: 'var(--accent-green)' },
-            { name: 'TypeScript', level: 85, color: 'var(--accent-blue)' },
-            { name: 'HTML/CSS', level: 90, color: 'var(--accent-yellow)' },
+            { name: 'TypeScript', level: 90, repos: 5, color: 'var(--accent-blue)' },
+            { name: 'Python', level: 85, repos: 3, color: 'var(--accent-yellow)' },
+            { name: 'JavaScript', level: 80, repos: 3, color: 'var(--accent-green)' },
+            { name: 'Java', level: 75, repos: 3, color: 'var(--accent-pink)' },
           ],
         },
         {
-          name: 'Backend',
-          icon: '▸',
+          name: 'Web & Markup',
+          icon: '&#9654;',
           skills: [
-            { name: 'NestJS', level: 80, color: 'var(--accent-pink)' },
-            { name: 'Express.js', level: 80, color: 'var(--accent-green)' },
-            { name: 'Django', level: 70, color: 'var(--accent-purple)' },
-            { name: 'Python', level: 85, color: 'var(--accent-yellow)' },
+            { name: 'HTML', level: 85, repos: 4, color: 'var(--accent-pink)' },
+            { name: 'CSS', level: 80, repos: 3, color: 'var(--accent-blue)' },
+            { name: 'Vue.js', level: 75, repos: 1, color: 'var(--accent-green)' },
+            { name: 'LaTeX / TeX', level: 70, repos: 2, color: 'var(--accent-yellow)' },
           ],
         },
         {
-          name: 'IA & Pesquisa',
-          icon: '▸',
+          name: 'Data Science',
+          icon: '&#9654;',
           skills: [
-            { name: 'PLN / NLP', level: 80, color: 'var(--accent-purple)' },
-            { name: 'RAG', level: 75, color: 'var(--accent-blue)' },
-            { name: 'Redes Complexas', level: 70, color: 'var(--accent-green)' },
-            { name: 'LaTeX', level: 75, color: 'var(--accent-yellow)' },
+            { name: 'Jupyter Notebook', level: 80, repos: 3, color: 'var(--accent-purple)' },
+            { name: 'PLN / NLP', level: 85, repos: 4, color: 'var(--accent-blue)' },
+            { name: 'Redes Complexas', level: 70, repos: 2, color: 'var(--accent-green)' },
+            { name: 'RAG', level: 75, repos: 1, color: 'var(--accent-yellow)' },
           ],
         },
         {
           name: 'Ferramentas',
-          icon: '▸',
+          icon: '&#9654;',
           skills: [
-            { name: 'Git/GitHub', level: 90, color: 'var(--accent-pink)' },
-            { name: 'Figma', level: 75, color: 'var(--accent-purple)' },
-            { name: 'Linux', level: 70, color: 'var(--accent-yellow)' },
-            { name: 'Docker', level: 60, color: 'var(--accent-blue)' },
+            { name: 'Git / GitHub', level: 95, repos: 20, color: 'var(--accent-pink)' },
+            { name: 'Figma', level: 70, repos: 0, color: 'var(--accent-purple)' },
           ],
         },
       ],
@@ -101,8 +105,8 @@ export default {
 
 <style scoped>
 .skills {
-  padding: 6rem 2rem;
-  background: var(--bg-primary);
+  padding: 4rem 2rem;
+  background: var(--bg-secondary);
 }
 
 .container {
@@ -113,7 +117,7 @@ export default {
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .skill-category {
@@ -129,9 +133,9 @@ export default {
 
 .cat-title {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--accent-pink);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -144,20 +148,31 @@ export default {
 .skill-items {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.8rem;
+}
+
+.skill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
 }
 
 .skill-name {
   font-size: 0.8rem;
   color: var(--text-secondary);
-  margin-bottom: 0.3rem;
-  display: block;
+}
+
+.skill-repos {
+  font-family: var(--font-pixel);
+  font-size: 0.35rem;
+  color: var(--text-muted);
 }
 
 .skill-bar {
-  height: 16px;
+  height: 14px;
   background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.08);
   position: relative;
   overflow: hidden;
 }
@@ -178,6 +193,18 @@ export default {
 .pixel-block {
   flex: 1;
   background: rgba(255, 255, 255, 0.2);
+}
+
+.skills-note {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.note-icon {
+  color: var(--accent-pink);
+  margin-right: 0.3rem;
 }
 
 @media (max-width: 768px) {

@@ -24,6 +24,9 @@
             <p v-if="item.advisor" class="advisor">
               <span class="advisor-label">Orientador:</span> {{ item.advisor }}
             </p>
+            <p v-if="item.coadvisor" class="advisor">
+              <span class="advisor-label coadvisor">Coorientador:</span> {{ item.coadvisor }}
+            </p>
           </div>
         </div>
       </div>
@@ -63,6 +66,7 @@ export default {
           institution: 'Instituto Federal do Piauí (IFPI) — Campus Picos',
           description: 'TCC: SisTIRA — Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas',
           advisor: 'Rogério Figueredo de Sousa',
+          coadvisor: 'Rafael Teixeira Anchiêta',
           status: 'Concluído',
           statusClass: 'done',
         },
@@ -81,7 +85,7 @@ export default {
 
 <style scoped>
 .formation {
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
   background: var(--bg-primary);
 }
 
@@ -109,7 +113,7 @@ export default {
 .timeline-item {
   display: flex;
   align-items: flex-start;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
   position: relative;
 }
 
@@ -213,11 +217,16 @@ export default {
 .advisor {
   font-size: 0.8rem;
   color: var(--text-muted);
+  margin-top: 0.3rem;
 }
 
 .advisor-label {
   color: var(--accent-green);
   font-weight: 600;
+}
+
+.advisor-label.coadvisor {
+  color: var(--accent-blue);
 }
 
 @media (max-width: 768px) {

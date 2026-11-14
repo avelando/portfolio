@@ -4,34 +4,37 @@
       <SectionTitle title="Sobre Mim" subtitle="Um pouco da minha trajetória" />
 
       <div class="about-content">
-        <div class="about-card">
+        <div class="about-card" :class="{ visible: isVisible }" ref="card">
           <div class="card-inner">
             <div class="photo-wrapper">
               <img src="@/assets/images/avelar.jpg" alt="Avelar Sousa" class="photo" />
               <div class="photo-border"></div>
+              <div class="photo-glitch"></div>
             </div>
             <div class="about-text">
-              <p>
-                Doutorando em Inteligência Artificial — Processamento de Linguagem Natural pelo
-                Instituto de Ciências Matemáticas e de Computação (ICMC/USP). Graduado em Análise e
-                Desenvolvimento de Sistemas pelo Instituto Federal do Piauí (IFPI), Campus Picos, e
-                técnico em Informática para Internet pelo IFPI, Campus Paulistana.
-              </p>
-              <p>
-                Atuo em projetos de pesquisa e extensão em Inteligência Artificial, com ênfase em
-                Recuperação Aumentada por Geração (RAG) aplicada a documentos públicos e em sistemas
-                de avaliação automática de respostas abertas, com particular interesse em
-                Processamento de Linguagem Natural (PLN) e suas aplicações em Educação e serviços públicos.
-              </p>
-              <p>
-                Possuo experiência prática em desenvolvimento web com Next.js, NestJS, Django e TypeScript.
-                Laureado academicamente pelo IFPI em 2025.
-              </p>
+              <div class="terminal-header">
+                <span class="terminal-dot red"></span>
+                <span class="terminal-dot yellow"></span>
+                <span class="terminal-dot green"></span>
+                <span class="terminal-title">about.txt</span>
+              </div>
+              <div class="terminal-body">
+                <p class="line" v-for="(line, i) in descriptionLines" :key="i">
+                  <span class="line-number">{{ String(i + 1).padStart(2, '0') }}</span>
+                  <span class="line-text">{{ line }}</span>
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="stats">
-            <div class="stat" v-for="stat in stats" :key="stat.label">
+            <div
+              class="stat"
+              v-for="(stat, i) in stats"
+              :key="stat.label"
+              :style="{ animationDelay: (i * 0.15) + 's' }"
+            >
+              <span class="stat-icon" v-html="stat.icon"></span>
               <span class="stat-value">{{ stat.value }}</span>
               <span class="stat-label">{{ stat.label }}</span>
             </div>
@@ -50,20 +53,39 @@ export default {
   components: { SectionTitle },
   data() {
     return {
+      isVisible: false,
+      descriptionLines: [
+        'Doutorando em Ciências da Computação e Matemática',
+        'Computacional pelo ICMC/USP, com foco em',
+        'Inteligência Artificial e Processamento de',
+        'Linguagem Natural (PLN).',
+        '',
+        'Graduado em Análise e Desenvolvimento de Sistemas',
+        'pelo IFPI. Pesquisador em PLN, RAG e Redes',
+        'Complexas. Desenvolvedor Web Full-Stack.',
+      ],
       stats: [
-        { value: '5+', label: 'Publicações' },
-        { value: '2', label: 'Patentes de Software' },
-        { value: '4+', label: 'Projetos de Pesquisa' },
-        { value: '1', label: 'Láurea Acadêmica' },
+        { value: '7+', label: 'Publicações', icon: '&#9830;' },
+        { value: '2', label: 'Registros de Software', icon: '&#9733;' },
+        { value: '10+', label: 'Citações', icon: '&#9672;' },
       ],
     };
+  },
+  mounted() {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) this.isVisible = true;
+      },
+      { threshold: 0.2 }
+    );
+    if (this.$refs.card) observer.observe(this.$refs.card);
   },
 };
 </script>
 
 <style scoped>
 .about {
-  padding: 6rem 2rem;
+  padding: 4rem 2rem;
   background: var(--bg-secondary);
   position: relative;
 }
@@ -74,7 +96,7 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 3px;
   background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple), var(--accent-blue));
 }
 
@@ -86,57 +108,148 @@ export default {
 .about-card {
   background: var(--bg-card);
   border: 2px solid rgba(233, 69, 96, 0.2);
-  padding: 2.5rem;
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.about-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .card-inner {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: flex-start;
 }
 
 .photo-wrapper {
   flex-shrink: 0;
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
 }
 
 .photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: grayscale(20%);
+  transition: filter 0.3s ease;
+}
+
+.photo-wrapper:hover .photo {
+  filter: grayscale(0%);
 }
 
 .photo-border {
   position: absolute;
-  inset: -6px;
+  inset: -4px;
   border: 3px solid var(--accent-pink);
   pointer-events: none;
+  transition: border-color 0.3s ease;
 }
 
-.about-text p {
-  color: var(--text-secondary);
+.photo-wrapper:hover .photo-border {
+  border-color: var(--accent-green);
+}
+
+.photo-glitch {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 95%, rgba(233, 69, 96, 0.1) 95%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.about-text {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.6rem 1rem;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.terminal-dot.red { background: #ff5f57; }
+.terminal-dot.yellow { background: #ffbd2e; }
+.terminal-dot.green { background: #28c840; }
+
+.terminal-title {
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+  color: var(--text-muted);
+  margin-left: 0.5rem;
+}
+
+.terminal-body {
+  padding: 1rem;
+}
+
+.line {
+  display: flex;
+  gap: 1rem;
   line-height: 1.8;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
 }
 
-.about-text p:last-child {
-  margin-bottom: 0;
+.line-number {
+  color: var(--text-muted);
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+  flex-shrink: 0;
+  padding-top: 0.25rem;
+  opacity: 0.5;
+}
+
+.line-text {
+  color: var(--text-secondary);
 }
 
 .stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
   border-top: 2px solid rgba(233, 69, 96, 0.15);
 }
 
 .stat {
   text-align: center;
+  padding: 1rem;
+  background: rgba(233, 69, 96, 0.03);
+  border: 1px solid rgba(233, 69, 96, 0.1);
+  transition: all 0.3s ease;
+}
+
+.stat:hover {
+  border-color: var(--accent-pink);
+  transform: translateY(-3px);
+  background: rgba(233, 69, 96, 0.08);
+}
+
+.stat-icon {
+  display: block;
+  font-size: 1.2rem;
+  color: var(--accent-pink);
+  margin-bottom: 0.4rem;
 }
 
 .stat-value {
@@ -144,11 +257,11 @@ export default {
   font-size: 1.2rem;
   color: var(--accent-green);
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .stat-label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -162,12 +275,12 @@ export default {
   }
 
   .photo-wrapper {
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
   }
 
   .stats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 
   .about-card {
