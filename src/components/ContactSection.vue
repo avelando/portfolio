@@ -115,7 +115,6 @@ export default {
 
 <style scoped>
 .contact {
-  min-height: 100vh;
   padding: 80px 2rem 0;
   background: var(--bg-quaternary);
 }
@@ -242,8 +241,8 @@ export default {
 }
 
 .footer {
-  margin-top: 3rem;
-  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+  padding: 1rem 2rem;
   border-top: 3px solid rgba(233, 69, 96, 0.2);
   text-align: center;
 }

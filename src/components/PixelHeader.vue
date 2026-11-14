@@ -8,17 +8,11 @@
         <span class="logo-cursor">_</span>
       </a>
 
-      <div class="header-right">
-        <button class="lang-toggle" @click="switchLang">
-          {{ langLabel }}
-        </button>
-
-        <button class="menu-toggle" @click="menuOpen = !menuOpen" :aria-label="menuOpen ? 'Fechar menu' : 'Abrir menu'">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+      <button class="menu-toggle" @click="menuOpen = !menuOpen" :aria-label="menuOpen ? 'Fechar menu' : 'Abrir menu'">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
       <nav :class="{ open: menuOpen }">
         <ul>
@@ -38,7 +32,7 @@
 </template>
 
 <script>
-import { t, toggleLocale } from '@/i18n';
+import { t } from '@/i18n';
 
 export default {
   name: 'PixelHeader',
@@ -53,9 +47,6 @@ export default {
     navItems() {
       const ids = ['home', 'about', 'formation', 'publications', 'experience', 'systems', 'projects', 'skills', 'contact'];
       return ids.map(id => ({ id, label: t('nav.' + id) }));
-    },
-    langLabel() {
-      return t('langToggle');
     },
   },
   mounted() {
@@ -91,9 +82,6 @@ export default {
         const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }
-    },
-    switchLang() {
-      toggleLocale();
     },
   },
 };
@@ -185,29 +173,6 @@ nav ul li a.active::after {
   width: 6px;
   height: 6px;
   background: var(--accent-pink);
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.lang-toggle {
-  font-family: var(--font-pixel);
-  font-size: 0.45rem;
-  padding: 0.35rem 0.7rem;
-  background: transparent;
-  border: 2px solid var(--accent-green);
-  color: var(--accent-green);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.lang-toggle:hover {
-  background: var(--accent-green);
-  color: var(--bg-primary);
 }
 
 .menu-toggle {

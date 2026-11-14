@@ -2,7 +2,7 @@ const publications = [
   {
     title: 'Extending an Ensemble Baseline with Corpus-Based Graph Features for Portuguese Pun Detection',
     authorIds: ['avelar-sousa', 'camilla-sousa', 'carlos-barros', 'rafael-anchieta'],
-    venue: '17th International Conference on Computational Processing of Portuguese (PROPOR 2026), Salvador/BA',
+    venue: '17th International Conference on Computational Processing of Portuguese (PROPOR 2026)',
     venueKey: 'propor-2026',
     year: '2026',
     pages: '759-769',
@@ -13,8 +13,8 @@ const publications = [
   },
   {
     title: 'Retrieval-Augmented Generation for Question Answering over Brazilian Portuguese Institutional Normative Documents',
-    authorIds: ['avelar-sousa', 'joao-sousa', 'karla-carvalho', 'maria-medeiros', 'marcos-moura'],
-    venue: 'XXIII Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2026), Cuiabá',
+    authorIds: ['avelar-sousa', 'jean-sousa', 'karielly-carvalho', 'messias-medeiros', 'marx-moura'],
+    venue: 'XXIII Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2026)',
     venueKey: 'eniac-2026',
     year: '2026',
     pages: null,
@@ -38,7 +38,7 @@ const publications = [
   {
     title: 'When the Split Matters: Reorganizing Micro-Edited Pairs for Portuguese Pun Detection',
     authorIds: ['avelar-sousa', 'maykon-ferreira', 'vitor-pontes', 'rafael-anchieta'],
-    venue: 'XXIII Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2026), Cuiabá',
+    venue: 'XXIII Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2026)',
     venueKey: 'eniac-2026',
     year: '2026',
     pages: null,

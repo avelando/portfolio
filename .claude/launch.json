@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "dev",
+      "name": "portfolio-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "serve", "--", "--port", "8082"],
+      "runtimeArgs": ["run", "serve"],
       "port": 8082
     }
   ]

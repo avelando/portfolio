@@ -2,8 +2,27 @@ import { reactive } from 'vue';
 import pt from './pt';
 import en from './en';
 
+function detectLocale() {
+  const params = new URLSearchParams(window.location.search);
+  const urlLang = params.get('lang');
+  if (urlLang === 'en' || urlLang === 'pt') return urlLang;
+
+  const browserLang = (navigator.language || navigator.userLanguage || 'pt').toLowerCase();
+  if (browserLang.startsWith('pt')) return 'pt';
+  return 'en';
+}
+
+function syncUrl(locale) {
+  const url = new URL(window.location.href);
+  url.searchParams.set('lang', locale);
+  window.history.replaceState(null, '', url.toString());
+}
+
+const initial = detectLocale();
+syncUrl(initial);
+
 const state = reactive({
-  locale: 'pt',
+  locale: initial,
   messages: { pt, en },
 });
 
@@ -20,6 +39,7 @@ export function t(key) {
 export function setLocale(locale) {
   if (state.messages[locale]) {
     state.locale = locale;
+    syncUrl(locale);
   }
 }
 
@@ -27,9 +47,4 @@ export function getLocale() {
   return state.locale;
 }
 
-export function toggleLocale() {
-  state.locale = state.locale === 'pt' ? 'en' : 'pt';
-  return state.locale;
-}
-
-export default { t, setLocale, getLocale, toggleLocale };
+export default { t, setLocale, getLocale };

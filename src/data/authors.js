@@ -2,58 +2,58 @@ const authors = {
   'avelar-sousa': {
     id: 'avelar-sousa',
     name: 'Avelar Rodrigues de Sousa',
-    lattes: 'http://lattes.cnpq.br/5118004962010339',
+    lattes: 'https://lattes.cnpq.br/5118004962010339',
     highlighted: true,
   },
   'rafael-anchieta': {
     id: 'rafael-anchieta',
     name: 'Rafael Torres Anchiêta',
-    lattes: null,
+    lattes: 'http://lattes.cnpq.br/7021895357654363',
   },
   'maykon-ferreira': {
     id: 'maykon-ferreira',
     name: 'Maykon Willyam de Sousa Ferreira',
-    lattes: null,
+    lattes: 'http://lattes.cnpq.br/1486308498624429',
   },
   'carlos-barros': {
     id: 'carlos-barros',
-    name: 'Carlos Henrique S. Barros',
-    lattes: null,
+    name: 'Carlos Henrique Santos Barros',
+    lattes: 'http://lattes.cnpq.br/2475000984926109',
   },
   'camilla-sousa': {
     id: 'camilla-sousa',
-    name: 'Camilla S. Sousa',
-    lattes: null,
+    name: 'Camilla Soares Sousa',
+    lattes: 'https://lattes.cnpq.br/4408608238719730',
   },
   'vitor-pontes': {
     id: 'vitor-pontes',
-    name: 'Vítor O. L. Pontes',
-    lattes: null,
+    name: 'Vítor Oliveira Lima Pontes',
+    lattes: 'https://lattes.cnpq.br/3515237579122378',
   },
-  'joao-sousa': {
-    id: 'joao-sousa',
-    name: 'J. C. R. Sousa',
-    lattes: null,
+  'jean-sousa': {
+    id: 'jean-sousa',
+    name: 'Jean Carlos Rodrigues Sousa',
+    lattes: 'https://lattes.cnpq.br/9947674875585426',
   },
-  'karla-carvalho': {
-    id: 'karla-carvalho',
-    name: 'K. Carvalho',
-    lattes: null,
+  'karielly-carvalho': {
+    id: 'karielly-carvalho',
+    name: 'Karielly de Carvalho',
+    lattes: 'https://lattes.cnpq.br/6983982949535866',
   },
-  'maria-medeiros': {
-    id: 'maria-medeiros',
-    name: 'M. M. P. Medeiros',
-    lattes: null,
+  'messias-medeiros': {
+    id: 'messias-medeiros',
+    name: 'Manoel Messias Pereira Medeiros',
+    lattes: 'https://lattes.cnpq.br/3692751461745479',
   },
-  'marcos-moura': {
-    id: 'marcos-moura',
-    name: 'M. R. Moura',
-    lattes: null,
+  'marx-moura': {
+    id: 'marx-moura',
+    name: 'Marx Rodrigues de Moura',
+    lattes: 'https://lattes.cnpq.br/5365630276072006',
   },
   'rogerio-sousa': {
     id: 'rogerio-sousa',
     name: 'Rogério Figueredo de Sousa',
-    lattes: null,
+    lattes: 'https://lattes.cnpq.br/9346694618502913',
   },
 };
 

@@ -96,9 +96,9 @@ export default {
     patentsTitle: 'Registros de Software',
     patentDateLabel: 'Registro:',
     venues: {
-      'propor-2026': '17th International Conference on Computational Processing of Portuguese (PROPOR 2026), Salvador/BA',
-      'eniac-2026': 'XXIII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026), Cuiaba',
-      'kdmile-2026': 'XIV Symposium on Knowledge Discovery, Mining and Learning (KDMiLe 2026)',
+      'propor-2026': 'XVII Conferência Internacional sobre Processamento Computacional da Língua Portuguesa (PROPOR 2026)',
+      'eniac-2026': 'XXIII Encontro Nacional de Inteligencia Artificial e Computacional (ENIAC 2026)',
+      'kdmile-2026': 'XIV Simpósio de Descoberta de Conhecimento, Mineração e Aprendizado (KDMiLe 2026)',
       'eri-go-2025': 'XIII Escola Regional de Informatica de Goias (ERI-GO 2025)',
       'stil-2025': 'XVI Simposio Brasileiro de Tecnologia da Informacao e da Linguagem Humana (STIL 2025)',
     },
@@ -265,5 +265,4 @@ export default {
   footer: {
     copyright: 'Avelar Rodrigues de Sousa',
   },
-  langToggle: 'EN',
 };

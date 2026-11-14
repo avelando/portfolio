@@ -96,8 +96,8 @@ export default {
     patentsTitle: 'Software Registrations',
     patentDateLabel: 'Registration:',
     venues: {
-      'propor-2026': '17th International Conference on Computational Processing of Portuguese (PROPOR 2026), Salvador/BA',
-      'eniac-2026': 'XXIII Brazilian Conference on Artificial and Computational Intelligence (ENIAC 2026), Cuiaba',
+      'propor-2026': '17th International Conference on Computational Processing of Portuguese (PROPOR 2026)',
+      'eniac-2026': 'XXIII Brazilian Conference on Artificial and Computational Intelligence (ENIAC 2026)',
       'kdmile-2026': 'XIV Symposium on Knowledge Discovery, Mining and Learning (KDMiLe 2026)',
       'eri-go-2025': 'XIII Regional School of Computer Science of Goias (ERI-GO 2025)',
       'stil-2025': 'XVI Brazilian Symposium on Information and Human Language Technology (STIL 2025)',
@@ -265,5 +265,4 @@ export default {
   footer: {
     copyright: 'Avelar Rodrigues de Sousa',
   },
-  langToggle: 'PT',
 };
