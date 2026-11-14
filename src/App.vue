@@ -2,13 +2,21 @@
   <div id="app">
     <PixelHeader />
     <HeroSection />
+    <PixelDivider color="var(--accent-pink)" />
     <AboutSection />
+    <PixelDivider color="var(--accent-green)" />
     <FormationSection />
+    <PixelDivider color="var(--accent-blue)" />
     <PublicationsSection />
+    <PixelDivider color="var(--accent-yellow)" />
     <ExperienceSection />
+    <PixelDivider color="var(--accent-purple)" />
     <SystemsSection />
+    <PixelDivider color="var(--accent-pink)" />
     <ResearchSection />
+    <PixelDivider color="var(--accent-green)" />
     <SkillsSection />
+    <PixelDivider color="var(--accent-blue)" />
     <ContactSection />
   </div>
 </template>
@@ -24,6 +32,7 @@ import ResearchSection from '@/components/ResearchSection.vue';
 import PublicationsSection from '@/components/PublicationsSection.vue';
 import SkillsSection from '@/components/SkillsSection.vue';
 import ContactSection from '@/components/ContactSection.vue';
+import PixelDivider from '@/components/PixelDivider.vue';
 
 export default {
   name: 'App',
@@ -38,6 +47,7 @@ export default {
     PublicationsSection,
     SkillsSection,
     ContactSection,
+    PixelDivider,
   },
 };
 </script>

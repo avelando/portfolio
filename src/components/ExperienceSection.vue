@@ -1,7 +1,7 @@
 <template>
   <section id="experience" class="experience">
     <div class="container">
-      <SectionTitle title="Experiência" subtitle="Atuação profissional e acadêmica" />
+      <SectionTitle :title="sectionTitle" :subtitle="sectionSubtitle" />
 
       <div class="experience-grid">
         <div
@@ -27,60 +27,15 @@
 
 <script>
 import SectionTitle from './SectionTitle.vue';
+import { t } from '@/i18n';
 
 export default {
   name: 'ExperienceSection',
   components: { SectionTitle },
-  data() {
-    return {
-      experiences: [
-        {
-          icon: '🎓',
-          period: '2026 - Atual',
-          title: 'Facilitador (Bolsista)',
-          organization: 'UNIVESP — Fundação Universidade Virtual do Estado de São Paulo',
-          description: 'Atuação como facilitador em cursos na modalidade a distância.',
-          type: 'Bolsa',
-          typeClass: 'scholarship',
-        },
-        {
-          icon: '💻',
-          period: '2024 - 2025',
-          title: 'Jovem Aprendiz — Desenvolvedor de Sistemas',
-          organization: 'Construtora e Incorporadora SOMA',
-          description: 'Desenvolvimento de projetos e sistemas utilizando TypeScript, Next.js, Express.js e HTML. Atuação em todas as etapas do desenvolvimento, desde planejamento até implementação e testes.',
-          type: 'CLT',
-          typeClass: 'clt',
-        },
-        {
-          icon: '📚',
-          period: '2024 - 2025',
-          title: 'Monitor Voluntário — Banco de Dados I',
-          organization: 'IFPI — Campus Picos',
-          description: 'Monitoria voluntária da disciplina de Banco de Dados I do curso de ADS.',
-          type: 'Voluntário',
-          typeClass: 'volunteer',
-        },
-        {
-          icon: '🌐',
-          period: '2025',
-          title: 'Monitor Voluntário — Programação para Internet I',
-          organization: 'IFPI — Campus Picos',
-          description: 'Monitoria voluntária da disciplina de Programação para Internet I do curso de ADS.',
-          type: 'Voluntário',
-          typeClass: 'volunteer',
-        },
-        {
-          icon: '🤝',
-          period: '2025',
-          title: 'Monitor — INCLUI +IFPI',
-          organization: 'IFPI — Campus Picos',
-          description: 'Evento de extensão para promoção da inclusão da comunidade surda utilizando esporte como ferramenta de interação.',
-          type: 'Extensão',
-          typeClass: 'extension',
-        },
-      ],
-    };
+  computed: {
+    sectionTitle() { return t('experience.title'); },
+    sectionSubtitle() { return t('experience.subtitle'); },
+    experiences() { return t('experience.items'); },
   },
 };
 </script>
@@ -88,12 +43,8 @@ export default {
 <style scoped>
 .experience {
   min-height: 100vh;
-  padding: 2rem 2rem;
-  padding-top: 90px;
-  background: var(--bg-secondary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 80px 2rem 3rem;
+  background: var(--bg-quaternary);
 }
 
 .container {

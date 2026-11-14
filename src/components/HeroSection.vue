@@ -10,7 +10,7 @@
 
     <div class="hero-content">
       <div class="hero-text">
-        <p class="greeting">&gt; Olá, mundo! Eu sou</p>
+        <p class="greeting">{{ greeting }}</p>
         <h1 class="name">
           <span class="first">Avelar</span>
           <span class="last">Sousa</span>
@@ -20,15 +20,13 @@
           <span class="role">{{ currentRole }}</span>
           <span class="cursor">|</span>
         </div>
-        <p class="description">
-          Doutorando em IA/PLN na USP (ICMC). Pesquisador e Desenvolvedor Full-Stack.
-        </p>
+        <p class="description">{{ description }}</p>
         <div class="hero-buttons">
           <a href="#projects" class="btn-primary" @click.prevent="scrollTo('projects')">
-            <span class="btn-icon">&#9654;</span> Ver Projetos
+            <span class="btn-icon">&#9654;</span> {{ btnProjects }}
           </a>
           <a href="#publications" class="btn-secondary" @click.prevent="scrollTo('publications')">
-            <span class="btn-icon">&#9830;</span> Publicações
+            <span class="btn-icon">&#9830;</span> {{ btnPublications }}
           </a>
         </div>
         <div class="hero-links">
@@ -61,16 +59,12 @@
 </template>
 
 <script>
+import { t } from '@/i18n';
+
 export default {
   name: 'HeroSection',
   data() {
     return {
-      roles: [
-        'Doutorando em IA @ USP',
-        'Pesquisador em PLN',
-        'Desenvolvedor Web Full-Stack',
-        'Graduado em ADS @ IFPI',
-      ],
       currentRoleIndex: 0,
       currentCharIndex: 0,
       isDeleting: false,
@@ -78,6 +72,13 @@ export default {
       publicPath: process.env.BASE_URL,
       typeSpeed: 80,
     };
+  },
+  computed: {
+    roles() { return t('hero.roles'); },
+    greeting() { return t('hero.greeting'); },
+    description() { return t('hero.description'); },
+    btnProjects() { return t('hero.btnProjects'); },
+    btnPublications() { return t('hero.btnPublications'); },
   },
   mounted() {
     this.typeEffect();
@@ -111,7 +112,7 @@ export default {
     scrollTo(id) {
       const el = document.getElementById(id);
       if (el) {
-        const offset = 80;
+        const offset = 70;
         const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({ top, behavior: 'smooth' });
       }

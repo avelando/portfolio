@@ -1,7 +1,7 @@
 <template>
   <section id="publications" class="publications">
     <div class="container">
-      <SectionTitle title="Publicações" subtitle="Artigos publicados em anais de congressos" />
+      <SectionTitle :title="sectionTitle" :subtitle="sectionSubtitle" />
 
       <div class="pub-filter">
         <button
@@ -24,7 +24,7 @@
             <span class="index-number">{{ String(index + 1).padStart(2, '0') }}</span>
           </div>
           <div class="pub-content">
-            <span :class="['pub-type', pub.typeClass]">{{ pub.type }}</span>
+            <span :class="['pub-type', pub.typeClass]">{{ translateType(pub.category) }}</span>
             <h3 class="pub-title">{{ pub.title }}</h3>
             <p class="pub-authors">
               <template v-for="(authorId, i) in pub.authorIds" :key="authorId">
@@ -45,13 +45,13 @@
             </p>
             <p class="pub-venue">
               <span class="venue-icon">&#9830;</span>
-              {{ pub.venue }}
+              {{ translateVenue(pub.venueKey, pub.venue) }}
             </p>
             <div class="pub-meta">
               <span class="pub-year">{{ pub.year }}</span>
               <span v-if="pub.pages" class="pub-pages">pp. {{ pub.pages }}</span>
               <a v-if="pub.link" :href="pub.link" target="_blank" rel="noopener" class="pub-link">
-                &#9654; Acessar
+                &#9654; {{ accessLabel }}
               </a>
             </div>
           </div>
@@ -60,18 +60,18 @@
 
       <div class="show-more" v-if="filteredPubs.length > initialCount && !showAllPubs">
         <button class="show-more-btn" @click="showAllPubs = true">
-          <span class="btn-icon">&#9660;</span> Ver mais publicações
+          <span class="btn-icon">&#9660;</span> {{ showMoreLabel }}
         </button>
       </div>
       <div class="show-less" v-if="showAllPubs && filteredPubs.length > initialCount">
         <button class="show-more-btn" @click="showAllPubs = false">
-          <span class="btn-icon">&#9650;</span> Ver menos
+          <span class="btn-icon">&#9650;</span> {{ showLessLabel }}
         </button>
       </div>
 
       <div class="patents-section">
         <h3 class="patents-title">
-          <span class="patents-icon">&#9733;</span> Registros de Software
+          <span class="patents-icon">&#9733;</span> {{ patentsTitle }}
         </h3>
         <div class="patent-cards">
           <div class="patent-card" v-for="(patent, i) in patents" :key="i">
@@ -94,7 +94,7 @@
                 <span v-else>{{ authorId }}</span>
               </template>
             </p>
-            <p class="patent-date">Registro: {{ patent.date }}</p>
+            <p class="patent-date">{{ patentDateLabel }} {{ patent.date }}</p>
           </div>
         </div>
       </div>
@@ -106,6 +106,7 @@
 import SectionTitle from './SectionTitle.vue';
 import authors from '@/data/authors';
 import { publications, patents } from '@/data/publications';
+import { t } from '@/i18n';
 
 export default {
   name: 'PublicationsSection',
@@ -115,17 +116,26 @@ export default {
       activePubFilter: 'all',
       showAllPubs: false,
       initialCount: 4,
-      pubFilters: [
-        { label: 'Todos', value: 'all' },
-        { label: 'Completos', value: 'full' },
-        { label: 'Resumos', value: 'abstract' },
-      ],
       publications,
       patents,
       authors,
     };
   },
   computed: {
+    sectionTitle() { return t('publications.title'); },
+    sectionSubtitle() { return t('publications.subtitle'); },
+    showMoreLabel() { return t('publications.showMore'); },
+    showLessLabel() { return t('publications.showLess'); },
+    accessLabel() { return t('publications.access'); },
+    patentsTitle() { return t('publications.patentsTitle'); },
+    patentDateLabel() { return t('publications.patentDateLabel'); },
+    pubFilters() {
+      return [
+        { label: t('publications.filterAll'), value: 'all' },
+        { label: t('publications.filterFull'), value: 'full' },
+        { label: t('publications.filterAbstract'), value: 'abstract' },
+      ];
+    },
     filteredPubs() {
       if (this.activePubFilter === 'all') return this.publications;
       return this.publications.filter((p) => p.category === this.activePubFilter);
@@ -138,6 +148,14 @@ export default {
     getAuthor(id) {
       return this.authors[id] || null;
     },
+    translateType(category) {
+      return category === 'full' ? t('publications.typeFull') : t('publications.typeAbstract');
+    },
+    translateVenue(key, fallback) {
+      if (!key) return fallback;
+      const venues = t('publications.venues');
+      return venues[key] || fallback;
+    },
   },
 };
 </script>
@@ -145,8 +163,8 @@ export default {
 <style scoped>
 .publications {
   min-height: 100vh;
-  padding: 2rem 2rem;
-  padding-top: 90px;
+  padding: 5rem 2rem 3rem;
+  padding-top: 80px;
   background: var(--bg-primary);
 }
 

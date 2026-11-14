@@ -1,7 +1,7 @@
 <template>
   <section id="contact" class="contact">
     <div class="container">
-      <SectionTitle title="Contato" subtitle="Vamos nos conectar?" />
+      <SectionTitle :title="sectionTitle" :subtitle="sectionSubtitle" />
 
       <div class="contact-content">
         <div class="contact-grid">
@@ -29,9 +29,7 @@
             alt="Personagem"
             class="character-img"
           />
-          <p class="character-text">
-            &gt; Aberto a colaborações em pesquisa, desenvolvimento e ideias sobre IA e PLN.
-          </p>
+          <p class="character-text">{{ characterText }}</p>
         </div>
       </div>
     </div>
@@ -49,6 +47,7 @@
 
 <script>
 import SectionTitle from './SectionTitle.vue';
+import { t } from '@/i18n';
 
 export default {
   name: 'ContactSection',
@@ -57,7 +56,15 @@ export default {
     return {
       publicPath: process.env.BASE_URL,
       currentYear: new Date().getFullYear(),
-      links: [
+    };
+  },
+  computed: {
+    sectionTitle() { return t('contact.title'); },
+    sectionSubtitle() { return t('contact.subtitle'); },
+    characterText() { return t('contact.characterText'); },
+    lattesHandle() { return t('contact.handles.lattes'); },
+    links() {
+      return [
         {
           label: 'GitHub',
           handle: '@avelando',
@@ -95,13 +102,13 @@ export default {
         },
         {
           label: 'Lattes',
-          handle: 'Currículo Lattes',
+          handle: this.lattesHandle,
           url: 'http://lattes.cnpq.br/5118004962010339',
           color: 'var(--accent-purple)',
           icon: '<svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
         },
-      ],
-    };
+      ];
+    },
   },
 };
 </script>
@@ -109,12 +116,8 @@ export default {
 <style scoped>
 .contact {
   min-height: 100vh;
-  padding: 2rem 2rem 0;
-  padding-top: 90px;
-  background: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 80px 2rem 0;
+  background: var(--bg-quaternary);
 }
 
 .container {

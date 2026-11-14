@@ -1,7 +1,7 @@
 <template>
   <section id="skills" class="skills">
     <div class="container">
-      <SectionTitle title="Skills" subtitle="Baseado nos repositórios públicos do GitHub" />
+      <SectionTitle :title="sectionTitle" :subtitle="sectionSubtitle" />
 
       <div class="skills-grid">
         <div
@@ -43,7 +43,7 @@
 
       <p class="skills-note">
         <span class="note-icon">&#9670;</span>
-        Baseado nos repositórios públicos do GitHub
+        {{ noteText }}
       </p>
     </div>
   </section>
@@ -51,15 +51,20 @@
 
 <script>
 import SectionTitle from './SectionTitle.vue';
+import { t } from '@/i18n';
 
 export default {
   name: 'SkillsSection',
   components: { SectionTitle },
-  data() {
-    return {
-      categories: [
+  computed: {
+    sectionTitle() { return t('skills.title'); },
+    sectionSubtitle() { return t('skills.subtitle'); },
+    noteText() { return t('skills.note'); },
+    categories() {
+      const catNames = t('skills.categories');
+      return [
         {
-          name: 'Linguagens',
+          name: catNames.languages,
           icon: '&#9654;',
           skills: [
             { name: 'TypeScript', level: 90, color: 'var(--accent-blue)' },
@@ -69,7 +74,7 @@ export default {
           ],
         },
         {
-          name: 'Web & Markup',
+          name: catNames.webMarkup,
           icon: '&#9654;',
           skills: [
             { name: 'HTML', level: 85, color: 'var(--accent-pink)' },
@@ -79,7 +84,7 @@ export default {
           ],
         },
         {
-          name: 'Data Science',
+          name: catNames.dataScience,
           icon: '&#9654;',
           skills: [
             { name: 'Jupyter Notebook', level: 80, color: 'var(--accent-purple)' },
@@ -89,15 +94,15 @@ export default {
           ],
         },
         {
-          name: 'Ferramentas',
+          name: catNames.tools,
           icon: '&#9654;',
           skills: [
             { name: 'Git / GitHub', level: 95, color: 'var(--accent-pink)' },
             { name: 'Figma', level: 70, color: 'var(--accent-purple)' },
           ],
         },
-      ],
-    };
+      ];
+    },
   },
 };
 </script>
@@ -105,12 +110,8 @@ export default {
 <style scoped>
 .skills {
   min-height: 100vh;
-  padding: 2rem 2rem;
-  padding-top: 90px;
+  padding: 80px 2rem 3rem;
   background: var(--bg-secondary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .container {

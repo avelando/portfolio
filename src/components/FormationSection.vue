@@ -1,7 +1,7 @@
 <template>
   <section id="formation" class="formation">
     <div class="container">
-      <SectionTitle title="Formação Acadêmica" subtitle="Minha trajetória educacional" />
+      <SectionTitle :title="sectionTitle" :subtitle="sectionSubtitle" />
 
       <div class="timeline">
         <div
@@ -16,16 +16,16 @@
           <div class="timeline-card">
             <div class="card-header">
               <span class="period">{{ item.period }}</span>
-              <span v-if="item.status" :class="['status', item.statusClass]">{{ item.status }}</span>
+              <span v-if="item.statusLabel" :class="['status', item.statusClass]">{{ item.statusLabel }}</span>
             </div>
             <h3 class="card-title">{{ item.title }}</h3>
             <p class="institution">{{ item.institution }}</p>
             <p v-if="item.description" class="card-description">{{ item.description }}</p>
             <p v-if="item.advisor" class="advisor">
-              <span class="advisor-label">Orientador:</span> {{ item.advisor }}
+              <span class="advisor-label">{{ advisorLabel }}</span> {{ item.advisor }}
             </p>
             <p v-if="item.coadvisor" class="advisor">
-              <span class="advisor-label coadvisor">Coorientador:</span> {{ item.coadvisor }}
+              <span class="advisor-label coadvisor">{{ coadvisorLabel }}</span> {{ item.coadvisor }}
             </p>
           </div>
         </div>
@@ -36,49 +36,26 @@
 
 <script>
 import SectionTitle from './SectionTitle.vue';
+import { t } from '@/i18n';
 
 export default {
   name: 'FormationSection',
   components: { SectionTitle },
-  data() {
-    return {
-      formations: [
-        {
-          period: '2026 - Atual',
-          title: 'Doutorado em Ciências da Computação e Matemática Computacional',
-          institution: 'Universidade de São Paulo (USP) — ICMC',
-          description: 'Inteligência Artificial — Processamento de Linguagem Natural',
-          advisor: 'Diego Raphael Amancio',
-          status: 'Em andamento',
-          statusClass: 'active',
-        },
-        {
-          period: '2026 - Atual',
-          title: 'Especialização em Processos Didáticos-Pedagógicos para EaD',
-          institution: 'Fundação Universidade Virtual do Estado de São Paulo (UNIVESP)',
-          description: 'Carga horária: 960h',
-          status: 'Em andamento',
-          statusClass: 'active',
-        },
-        {
-          period: '2023 - 2025',
-          title: 'Tecnólogo em Análise e Desenvolvimento de Sistemas',
-          institution: 'Instituto Federal do Piauí (IFPI) — Campus Picos',
-          description: 'TCC: SisTIRA — Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas',
-          advisor: 'Rogério Figueredo de Sousa',
-          coadvisor: 'Rafael Torres Anchiêta',
-          status: 'Concluído',
-          statusClass: 'done',
-        },
-        {
-          period: '2020 - 2023',
-          title: 'Ensino Médio Integrado — Informática para Internet',
-          institution: 'Instituto Federal do Piauí (IFPI) — Campus Paulistana',
-          status: 'Concluído',
-          statusClass: 'done',
-        },
-      ],
-    };
+  computed: {
+    sectionTitle() { return t('formation.title'); },
+    sectionSubtitle() { return t('formation.subtitle'); },
+    advisorLabel() { return t('formation.advisorLabel'); },
+    coadvisorLabel() { return t('formation.coadvisorLabel'); },
+    formations() {
+      const items = t('formation.items');
+      const statusActive = t('formation.statusActive');
+      const statusDone = t('formation.statusDone');
+      return items.map(item => ({
+        ...item,
+        statusLabel: item.status === 'active' ? statusActive : statusDone,
+        statusClass: item.status,
+      }));
+    },
   },
 };
 </script>
@@ -86,12 +63,8 @@ export default {
 <style scoped>
 .formation {
   min-height: 100vh;
-  padding: 2rem 2rem;
-  padding-top: 90px;
-  background: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 80px 2rem 3rem;
+  background: var(--bg-tertiary);
 }
 
 .container {

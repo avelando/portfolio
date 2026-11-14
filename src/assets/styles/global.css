@@ -3,6 +3,8 @@
 :root {
   --bg-primary: #0f0e17;
   --bg-secondary: #1a1a2e;
+  --bg-tertiary: #0d1b2a;
+  --bg-quaternary: #1b0f1e;
   --bg-card: #16213e;
   --bg-card-hover: #1c2a4a;
   --accent-pink: #e94560;

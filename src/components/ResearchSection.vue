@@ -1,7 +1,7 @@
 <template>
   <section id="projects" class="research">
     <div class="container">
-      <SectionTitle title="Projetos" subtitle="Projetos de pesquisa e extensão" />
+      <SectionTitle :title="sectionTitle" :subtitle="sectionSubtitle" />
 
       <div class="filter-bar">
         <button
@@ -33,12 +33,12 @@
 
       <div class="show-more" v-if="filteredProjects.length > initialCount && !showAll">
         <button class="show-more-btn" @click="showAll = true">
-          <span class="btn-icon">&#9660;</span> Ver mais projetos
+          <span class="btn-icon">&#9660;</span> {{ showMoreLabel }}
         </button>
       </div>
       <div class="show-less" v-if="showAll && filteredProjects.length > initialCount">
         <button class="show-more-btn" @click="showAll = false">
-          <span class="btn-icon">&#9650;</span> Ver menos
+          <span class="btn-icon">&#9650;</span> {{ showLessLabel }}
         </button>
       </div>
     </div>
@@ -47,6 +47,7 @@
 
 <script>
 import SectionTitle from './SectionTitle.vue';
+import { t } from '@/i18n';
 
 export default {
   name: 'ResearchSection',
@@ -56,48 +57,21 @@ export default {
       showAll: false,
       initialCount: 6,
       activeFilter: 'all',
-      filters: [
-        { label: 'Todos', value: 'all' },
-        { label: 'Pesquisa', value: 'research' },
-        { label: 'Extensão', value: 'extension' },
-      ],
-      projects: [
-        {
-          title: 'SisTIRA — Tutoria Inteligente',
-          description: 'Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas. Trabalho de Conclusão de Curso.',
-          tag: 'Pesquisa',
-          tagClass: 'tag-research',
-          category: 'research',
-          period: '2024 - 2025',
-        },
-        {
-          title: 'RAG para Documentos Públicos Normativos',
-          description: 'Sistema de Recuperação Aumentada por Geração para pergunta e resposta sobre documentos normativos institucionais em português brasileiro.',
-          tag: 'Pesquisa',
-          tagClass: 'tag-research',
-          category: 'research',
-          period: '2025 - 2026',
-        },
-        {
-          title: 'INCLUI +IFPI',
-          description: 'Projeto de extensão para promoção da inclusão da comunidade surda utilizando esporte como ferramenta de interação.',
-          tag: 'Extensão',
-          tagClass: 'tag-extension',
-          category: 'extension',
-          period: '2025',
-        },
-        {
-          title: 'Programa de Rádio Papo Federal',
-          description: 'Programa de rádio semanal na Rádio Cultura FM com entrevistas e discussões para contribuir com a educação e ampliação do universo cultural da comunidade escolar e da população de Picos e região.',
-          tag: 'Extensão',
-          tagClass: 'tag-extension',
-          category: 'extension',
-          period: '2025',
-        },
-      ],
     };
   },
   computed: {
+    sectionTitle() { return t('projects.title'); },
+    sectionSubtitle() { return t('projects.subtitle'); },
+    showMoreLabel() { return t('projects.showMore'); },
+    showLessLabel() { return t('projects.showLess'); },
+    filters() {
+      return [
+        { label: t('projects.filterAll'), value: 'all' },
+        { label: t('projects.filterResearch'), value: 'research' },
+        { label: t('projects.filterExtension'), value: 'extension' },
+      ];
+    },
+    projects() { return t('projects.items'); },
     filteredProjects() {
       if (this.activeFilter === 'all') return this.projects;
       return this.projects.filter((p) => p.category === this.activeFilter);
@@ -112,12 +86,8 @@ export default {
 <style scoped>
 .research {
   min-height: 100vh;
-  padding: 2rem 2rem;
-  padding-top: 90px;
-  background: var(--bg-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: 80px 2rem 3rem;
+  background: var(--bg-tertiary);
 }
 
 .container {

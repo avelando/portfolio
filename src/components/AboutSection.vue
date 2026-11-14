@@ -1,7 +1,10 @@
 <template>
   <section id="about" class="about">
+    <div class="pixel-particles">
+      <span v-for="n in 12" :key="n" class="float-pixel" :style="floatStyle(n)"></span>
+    </div>
     <div class="container">
-      <SectionTitle title="Sobre Mim" subtitle="Um pouco da minha trajetória" />
+      <SectionTitle :title="sectionTitle" :subtitle="sectionSubtitle" />
 
       <div class="about-content">
         <div class="about-card" :class="{ visible: isVisible }" ref="card">
@@ -16,10 +19,10 @@
                 <span class="terminal-dot red"></span>
                 <span class="terminal-dot yellow"></span>
                 <span class="terminal-dot green"></span>
-                <span class="terminal-title">about.txt</span>
+                <span class="terminal-title">{{ terminalTitle }}</span>
               </div>
               <div class="terminal-body">
-                <p class="line" v-for="(line, i) in descriptionLines" :key="i">
+                <p class="line" v-for="(line, i) in lines" :key="i">
                   <span class="line-number">{{ String(i + 1).padStart(2, '0') }}</span>
                   <span class="line-text">{{ line }}</span>
                 </p>
@@ -30,7 +33,7 @@
           <div class="stats">
             <div
               class="stat"
-              v-for="(stat, i) in stats"
+              v-for="(stat, i) in translatedStats"
               :key="stat.label"
               :style="{ animationDelay: (i * 0.15) + 's' }"
             >
@@ -47,6 +50,7 @@
 
 <script>
 import SectionTitle from './SectionTitle.vue';
+import { t } from '@/i18n';
 
 export default {
   name: 'AboutSection',
@@ -54,22 +58,18 @@ export default {
   data() {
     return {
       isVisible: false,
-      descriptionLines: [
-        'Doutorando em Ciências da Computação e Matemática',
-        'Computacional pelo ICMC/USP, com foco em',
-        'Inteligência Artificial e Processamento de',
-        'Linguagem Natural (PLN).',
-        '',
-        'Graduado em Análise e Desenvolvimento de Sistemas',
-        'pelo IFPI. Pesquisador em PLN, RAG e Redes',
-        'Complexas. Desenvolvedor Web Full-Stack.',
-      ],
-      stats: [
-        { value: '7+', label: 'Publicações', icon: '&#9830;' },
-        { value: '2', label: 'Registros de Software', icon: '&#9733;' },
-        { value: '10+', label: 'Citações', icon: '&#9672;' },
-      ],
+      icons: ['&#9830;', '&#9733;', '&#9672;'],
     };
+  },
+  computed: {
+    sectionTitle() { return t('about.title'); },
+    sectionSubtitle() { return t('about.subtitle'); },
+    terminalTitle() { return t('about.terminalTitle'); },
+    lines() { return t('about.lines'); },
+    translatedStats() {
+      const stats = t('about.stats');
+      return stats.map((s, i) => ({ ...s, icon: this.icons[i] }));
+    },
   },
   mounted() {
     const observer = new IntersectionObserver(
@@ -80,19 +80,60 @@ export default {
     );
     if (this.$refs.card) observer.observe(this.$refs.card);
   },
+  methods: {
+    floatStyle(n) {
+      const x = ((n * 37) % 100);
+      const y = ((n * 53) % 100);
+      const size = (n % 3) + 2;
+      const delay = (n * 0.5) % 6;
+      const duration = 4 + (n % 4);
+      const colors = ['var(--accent-pink)', 'var(--accent-green)', 'var(--accent-blue)', 'var(--accent-yellow)'];
+      return {
+        left: x + '%',
+        top: y + '%',
+        width: size + 'px',
+        height: size + 'px',
+        background: colors[n % 4],
+        animationDelay: delay + 's',
+        animationDuration: duration + 's',
+      };
+    },
+  },
 };
 </script>
 
 <style scoped>
 .about {
   min-height: 100vh;
-  padding: 2rem 2rem;
-  padding-top: 90px;
+  padding: 80px 2rem 3rem;
   background: var(--bg-secondary);
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  overflow: hidden;
+}
+
+.pixel-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.float-pixel {
+  position: absolute;
+  opacity: 0;
+  animation: floatPixel ease-in-out infinite;
+}
+
+@keyframes floatPixel {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+  25% { opacity: 0.4; }
+  50% { opacity: 0.6; transform: translateY(-20px) scale(1); }
+  75% { opacity: 0.3; }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
 }
 
 .about::before {
