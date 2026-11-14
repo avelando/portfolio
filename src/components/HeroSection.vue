@@ -396,6 +396,7 @@ export default {
   .character-frame {
     width: 220px;
     height: 220px;
+    max-width: calc(100vw - 6rem);
   }
 
 }
