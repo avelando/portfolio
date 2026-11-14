@@ -43,10 +43,10 @@ export default {
         { id: 'home', label: 'Home' },
         { id: 'about', label: 'Sobre' },
         { id: 'formation', label: 'Formação' },
+        { id: 'publications', label: 'Publicações' },
         { id: 'experience', label: 'Experiência' },
         { id: 'systems', label: 'Sistemas' },
         { id: 'projects', label: 'Projetos' },
-        { id: 'publications', label: 'Publicações' },
         { id: 'skills', label: 'Skills' },
         { id: 'contact', label: 'Contato' },
       ],
@@ -61,6 +61,11 @@ export default {
   methods: {
     handleScroll() {
       this.isScrolled = window.scrollY > 50;
+
+      if (window.innerHeight + Math.ceil(window.scrollY) >= document.documentElement.scrollHeight - 2) {
+        this.activeSection = this.navItems[this.navItems.length - 1].id;
+        return;
+      }
 
       const sections = this.navItems.map((item) => document.getElementById(item.id)).filter(Boolean);
       const scrollPos = window.scrollY + 120;
@@ -144,15 +149,15 @@ export default {
 nav ul {
   display: flex;
   list-style: none;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 nav ul li a {
   font-family: var(--font-pixel);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   color: var(--text-secondary);
   text-decoration: none;
-  padding: 0.5rem 0.8rem;
+  padding: 0.5rem 0.6rem;
   transition: all 0.3s ease;
   position: relative;
 }

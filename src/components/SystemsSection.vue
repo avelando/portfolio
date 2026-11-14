@@ -3,43 +3,31 @@
     <div class="container">
       <SectionTitle title="Sistemas" subtitle="Sistemas desenvolvidos" />
 
-      <div class="systems-list">
-        <div
+      <div class="systems-grid">
+        <a
           class="system-card"
-          v-for="(system, index) in visibleSystems"
+          v-for="(system, index) in systems"
           :key="index"
+          :href="system.github || system.link || '#'"
+          :target="system.github || system.link ? '_blank' : '_self'"
+          rel="noopener"
         >
-          <div class="card-left">
-            <span class="card-tag">Sistema</span>
+          <span class="card-tag">Sistema</span>
+          <h3 class="card-title">{{ system.title }}</h3>
+          <p class="card-desc">{{ system.description }}</p>
+          <div class="card-techs">
+            <span class="tech" v-for="tech in system.techs" :key="tech">{{ tech }}</span>
           </div>
-          <div class="card-content">
-            <h3 class="card-title">{{ system.title }}</h3>
-            <p class="card-desc">{{ system.description }}</p>
-            <div class="card-techs">
-              <span class="tech" v-for="tech in system.techs" :key="tech">{{ tech }}</span>
-            </div>
-            <div class="card-links">
-              <a v-if="system.link" :href="system.link" target="_blank" rel="noopener" class="card-link page">
-                <span>&#9654;</span> Acessar
-              </a>
-              <a v-if="system.github" :href="system.github" target="_blank" rel="noopener" class="card-link github">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-                GitHub
-              </a>
-            </div>
+          <div class="card-links">
+            <span v-if="system.link" class="card-link page">
+              <span>&#9654;</span> Acessar
+            </span>
+            <span v-if="system.github" class="card-link github">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </span>
           </div>
-        </div>
-      </div>
-
-      <div class="show-more" v-if="systems.length > initialCount && !showAll">
-        <button class="show-more-btn" @click="showAll = true">
-          <span class="btn-icon">&#9660;</span> Ver mais sistemas
-        </button>
-      </div>
-      <div class="show-less" v-if="showAll && systems.length > initialCount">
-        <button class="show-more-btn" @click="showAll = false">
-          <span class="btn-icon">&#9650;</span> Ver menos
-        </button>
+        </a>
       </div>
     </div>
   </section>
@@ -53,31 +41,29 @@ export default {
   components: { SectionTitle },
   data() {
     return {
-      showAll: false,
-      initialCount: 6,
       systems: [
         {
           title: 'SisTIRA',
-          description: 'Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas. Registro de software INPI: BR512025004679-0.',
-          techs: ['Python', 'PLN', 'Django', 'NLP'],
+          description: 'Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas.',
+          techs: ['Python', 'PLN', 'Django'],
           link: 'https://www.figma.com/design/oWMkDCr0E8KoUuV2LuxPFZ/SisTIRA',
         },
         {
           title: 'RAG — Documentos Públicos',
-          description: 'Sistema de Recuperação de Informação em Documentos Públicos utilizando Retrieval Augmented Generation (RAG).',
-          techs: ['RAG', 'LLM', 'Python', 'NLP'],
+          description: 'Sistema de Recuperação de Informação em Documentos Públicos utilizando RAG.',
+          techs: ['RAG', 'LLM', 'Python'],
         },
         {
           title: 'Landing Page — SOMA',
-          description: 'Landing page desenvolvida para divulgação da Construtora e Incorporadora SOMA.',
+          description: 'Landing page para divulgação da Construtora e Incorporadora SOMA.',
           techs: ['Next.js', 'TypeScript', 'CSS'],
           github: 'https://github.com/Aprendizes-SOMA/landing-page.git',
           link: 'https://www.figma.com/design/B62f8ZIu5CUD3qJQhFkkHy/Construtora-e-incorporadora-SOMA',
         },
         {
           title: 'Wordle of Dreams',
-          description: 'Jogo de palavras inspirado no Wordle. Registro de software INPI: BR512026001585-5.',
-          techs: ['TypeScript', 'Web', 'JavaScript'],
+          description: 'Jogo de palavras inspirado no Wordle. Registro INPI: BR512026001585-5.',
+          techs: ['TypeScript', 'JavaScript'],
           github: 'https://github.com/WordleOfThrones/WordleOfThrones.git',
         },
         {
@@ -87,18 +73,13 @@ export default {
           github: 'https://github.com/WordleOfThrones/ThronesAPI.git',
         },
         {
-          title: 'Cursos Online — AJK System',
-          description: 'Sistema desenvolvido com Java e JavaFX para a disciplina de Programação Orientada a Objetos.',
+          title: 'Cursos Online — AJK',
+          description: 'Sistema com Java e JavaFX para a disciplina de POO.',
           techs: ['Java', 'JavaFX', 'OOP'],
           github: 'https://github.com/ifpi-picos/cursos-online-ajk-academic-system.git',
         },
       ],
     };
-  },
-  computed: {
-    visibleSystems() {
-      return this.showAll ? this.systems : this.systems.slice(0, this.initialCount);
-    },
   },
 };
 </script>
@@ -110,74 +91,68 @@ export default {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
-.systems-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+.systems-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
 }
 
 .system-card {
-  display: flex;
-  gap: 1rem;
   background: var(--bg-card);
   border: 2px solid rgba(233, 69, 96, 0.12);
   padding: 1.2rem;
   transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
 }
 
 .system-card:hover {
   border-color: var(--accent-green);
-  transform: translateX(3px);
-}
-
-.card-left {
-  flex-shrink: 0;
-  display: flex;
-  align-items: flex-start;
+  transform: translateY(-4px);
 }
 
 .card-tag {
   font-family: var(--font-pixel);
-  font-size: 0.4rem;
-  padding: 0.3rem 0.5rem;
+  font-size: 0.35rem;
+  padding: 0.2rem 0.4rem;
   border: 2px solid var(--accent-green);
   color: var(--accent-green);
-  white-space: nowrap;
-}
-
-.card-content {
-  flex: 1;
+  align-self: flex-start;
+  margin-bottom: 0.6rem;
 }
 
 .card-title {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-primary);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
 }
 
 .card-desc {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: var(--text-secondary);
   line-height: 1.5;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+  flex: 1;
 }
 
 .card-techs {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.3rem;
   margin-bottom: 0.6rem;
 }
 
 .tech {
   font-family: var(--font-pixel);
-  font-size: 0.4rem;
-  padding: 0.2rem 0.5rem;
+  font-size: 0.35rem;
+  padding: 0.15rem 0.4rem;
   background: rgba(79, 195, 247, 0.1);
   border: 1px solid rgba(79, 195, 247, 0.3);
   color: var(--accent-blue);
@@ -185,19 +160,18 @@ export default {
 
 .card-links {
   display: flex;
-  gap: 0.6rem;
+  gap: 0.5rem;
+  margin-top: auto;
 }
 
 .card-link {
   font-family: var(--font-pixel);
-  font-size: 0.45rem;
-  text-decoration: none;
-  padding: 0.4rem 0.8rem;
+  font-size: 0.4rem;
+  padding: 0.3rem 0.6rem;
   border: 2px solid;
-  transition: all 0.3s ease;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
 }
 
 .card-link.page {
@@ -205,53 +179,20 @@ export default {
   border-color: var(--accent-pink);
 }
 
-.card-link.page:hover {
-  background: var(--accent-pink);
-  color: #fff;
-}
-
 .card-link.github {
   color: var(--accent-green);
   border-color: var(--accent-green);
 }
 
-.card-link.github:hover {
-  background: var(--accent-green);
-  color: var(--bg-primary);
-}
-
-.show-more, .show-less {
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-.show-more-btn {
-  font-family: var(--font-pixel);
-  font-size: 0.5rem;
-  padding: 0.8rem 2rem;
-  background: transparent;
-  border: 2px solid var(--accent-pink);
-  color: var(--accent-pink);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.show-more-btn:hover {
-  background: var(--accent-pink);
-  color: #fff;
-}
-
-.btn-icon {
-  font-size: 0.4rem;
+@media (max-width: 900px) {
+  .systems-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
-  .system-card {
-    flex-direction: column;
-    gap: 0.5rem;
+  .systems-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>

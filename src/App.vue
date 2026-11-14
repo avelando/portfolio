@@ -4,10 +4,10 @@
     <HeroSection />
     <AboutSection />
     <FormationSection />
+    <PublicationsSection />
     <ExperienceSection />
     <SystemsSection />
     <ResearchSection />
-    <PublicationsSection />
     <SkillsSection />
     <ContactSection />
   </div>

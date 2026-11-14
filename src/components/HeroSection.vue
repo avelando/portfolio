@@ -10,19 +10,11 @@
 
     <div class="hero-content">
       <div class="hero-text">
-        <div class="greeting-row">
-          <div class="profile-photo-wrapper">
-            <img src="@/assets/images/avelar3.jpg" alt="Avelar Sousa" class="profile-photo" />
-            <div class="photo-frame"></div>
-          </div>
-          <div>
-            <p class="greeting">&gt; Olá, mundo! Eu sou</p>
-            <h1 class="name">
-              <span class="first">Avelar</span>
-              <span class="last">Sousa</span>
-            </h1>
-          </div>
-        </div>
+        <p class="greeting">&gt; Olá, mundo! Eu sou</p>
+        <h1 class="name">
+          <span class="first">Avelar</span>
+          <span class="last">Sousa</span>
+        </h1>
         <div class="role-wrapper">
           <span class="role-prefix">&gt;&gt;</span>
           <span class="role">{{ currentRole }}</span>
@@ -214,36 +206,6 @@ export default {
   flex: 1;
 }
 
-.greeting-row {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.profile-photo-wrapper {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  flex-shrink: 0;
-}
-
-.profile-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  clip-path: polygon(8% 0%, 92% 0%, 100% 8%, 100% 92%, 92% 100%, 8% 100%, 0% 92%, 0% 8%);
-}
-
-.photo-frame {
-  position: absolute;
-  inset: -3px;
-  clip-path: polygon(8% 0%, 92% 0%, 100% 8%, 100% 92%, 92% 100%, 8% 100%, 0% 92%, 0% 8%);
-  border: 2px solid var(--accent-pink);
-  pointer-events: none;
-}
-
 .greeting {
   font-family: var(--font-pixel);
   font-size: 0.7rem;
@@ -413,11 +375,6 @@ export default {
     padding-top: 2rem;
   }
 
-  .greeting-row {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
   .name {
     font-size: 1.5rem;
   }
@@ -441,10 +398,6 @@ export default {
     height: 220px;
   }
 
-  .profile-photo-wrapper {
-    width: 80px;
-    height: 80px;
-  }
 }
 
 @media (max-width: 480px) {
