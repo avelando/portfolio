@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #0f0e17;
+  --bg-secondary: #1a1a2e;
+  --bg-card: #16213e;
+  --bg-card-hover: #1c2a4a;
+  --accent-pink: #e94560;
+  --accent-green: #53d769;
+  --accent-yellow: #ffd93d;
+  --accent-blue: #4fc3f7;
+  --accent-purple: #b388ff;
+  --text-primary: #eaeaea;
+  --text-secondary: #a7a7c4;
+  --text-muted: #6c6c8a;
+  --pixel-border: #e94560;
+  --font-pixel: 'Press Start 2P', cursive;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-pink);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b81;
+}
+
+::selection {
+  background: var(--accent-pink);
+  color: var(--text-primary);
+}
+
+.pixel-border {
+  border: 4px solid var(--pixel-border);
+  box-shadow:
+    4px 0 0 0 var(--pixel-border),
+    -4px 0 0 0 var(--pixel-border),
+    0 4px 0 0 var(--pixel-border),
+    0 -4px 0 0 var(--pixel-border);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+a {
+  color: var(--accent-blue);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-pink);
+}
