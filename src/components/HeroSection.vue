@@ -10,11 +10,19 @@
 
     <div class="hero-content">
       <div class="hero-text">
-        <p class="greeting">&gt; Olá, mundo! Eu sou</p>
-        <h1 class="name">
-          <span class="first">Avelar</span>
-          <span class="last">Sousa</span>
-        </h1>
+        <div class="greeting-row">
+          <div class="profile-photo-wrapper">
+            <img src="@/assets/images/avelar3.jpg" alt="Avelar Sousa" class="profile-photo" />
+            <div class="photo-frame"></div>
+          </div>
+          <div>
+            <p class="greeting">&gt; Olá, mundo! Eu sou</p>
+            <h1 class="name">
+              <span class="first">Avelar</span>
+              <span class="last">Sousa</span>
+            </h1>
+          </div>
+        </div>
         <div class="role-wrapper">
           <span class="role-prefix">&gt;&gt;</span>
           <span class="role">{{ currentRole }}</span>
@@ -32,7 +40,7 @@
           </a>
         </div>
         <div class="hero-links">
-          <a href="https://instagram.com/avelar.rodrigues.921" target="_blank" rel="noopener" title="Instagram">
+          <a href="https://instagram.com/avelando" target="_blank" rel="noopener" title="Instagram">
             <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
           <a href="https://linkedin.com/in/avelar-rodrigues-15568a1b1" target="_blank" rel="noopener" title="LinkedIn">
@@ -47,12 +55,8 @@
         </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="profile-photo-wrapper">
-          <img src="@/assets/images/avelar3.jpg" alt="Avelar Sousa" class="profile-photo" />
-          <div class="photo-frame"></div>
-        </div>
-        <div class="character-wrapper">
+      <div class="hero-character">
+        <div class="character-frame">
           <img
             :src="publicPath + 'personagem_transparente.gif'"
             alt="Personagem pixel art"
@@ -202,7 +206,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 3rem;
+  gap: 4rem;
   width: 100%;
 }
 
@@ -210,18 +214,47 @@ export default {
   flex: 1;
 }
 
+.greeting-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-photo-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  clip-path: polygon(8% 0%, 92% 0%, 100% 8%, 100% 92%, 92% 100%, 8% 100%, 0% 92%, 0% 8%);
+}
+
+.photo-frame {
+  position: absolute;
+  inset: -3px;
+  clip-path: polygon(8% 0%, 92% 0%, 100% 8%, 100% 92%, 92% 100%, 8% 100%, 0% 92%, 0% 8%);
+  border: 2px solid var(--accent-pink);
+  pointer-events: none;
+}
+
 .greeting {
   font-family: var(--font-pixel);
   font-size: 0.7rem;
   color: var(--accent-green);
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .name {
   font-family: var(--font-pixel);
   font-size: 2.2rem;
-  line-height: 1.4;
-  margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
 .name .first {
@@ -330,62 +363,46 @@ export default {
   transform: translateY(-3px);
 }
 
-.hero-visual {
+.hero-character {
   flex-shrink: 0;
+}
+
+.character-frame {
+  width: 300px;
+  height: 300px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-}
-
-.profile-photo-wrapper {
+  justify-content: center;
   position: relative;
-  width: 200px;
-  height: 200px;
-}
-
-.profile-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  clip-path: polygon(8% 0%, 92% 0%, 100% 8%, 100% 92%, 92% 100%, 8% 100%, 0% 92%, 0% 8%);
-  animation: photoGlow 3s ease-in-out infinite;
-}
-
-@keyframes photoGlow {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.1); }
-}
-
-.photo-frame {
-  position: absolute;
-  inset: -4px;
-  clip-path: polygon(8% 0%, 92% 0%, 100% 8%, 100% 92%, 92% 100%, 8% 100%, 0% 92%, 0% 8%);
-  border: 3px solid var(--accent-pink);
-  pointer-events: none;
-  animation: framePulse 3s ease-in-out infinite;
-}
-
-@keyframes framePulse {
-  0%, 100% { border-color: var(--accent-pink); }
-  50% { border-color: var(--accent-purple); }
-}
-
-.character-wrapper {
-  width: 140px;
-  height: 140px;
   animation: float 4s ease-in-out infinite;
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-15px); }
+}
+
+.character-frame::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 4px solid var(--accent-pink);
+  opacity: 0.3;
+}
+
+.character-frame::after {
+  content: '';
+  position: absolute;
+  inset: -16px;
+  border: 2px solid var(--accent-green);
+  opacity: 0.15;
 }
 
 .character-img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  image-rendering: auto;
 }
 
 @media (max-width: 900px) {
@@ -394,6 +411,11 @@ export default {
     text-align: center;
     gap: 2rem;
     padding-top: 2rem;
+  }
+
+  .greeting-row {
+    flex-direction: column;
+    gap: 1rem;
   }
 
   .name {
@@ -414,14 +436,14 @@ export default {
     justify-content: center;
   }
 
-  .profile-photo-wrapper {
-    width: 160px;
-    height: 160px;
+  .character-frame {
+    width: 220px;
+    height: 220px;
   }
 
-  .character-wrapper {
-    width: 100px;
-    height: 100px;
+  .profile-photo-wrapper {
+    width: 80px;
+    height: 80px;
   }
 }
 

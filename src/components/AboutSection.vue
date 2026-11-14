@@ -85,7 +85,7 @@ export default {
 
 <style scoped>
 .about {
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   background: var(--bg-secondary);
   position: relative;
 }

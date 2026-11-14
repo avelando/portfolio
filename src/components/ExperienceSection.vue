@@ -87,7 +87,7 @@ export default {
 
 <style scoped>
 .experience {
-  padding: 6rem 2rem;
+  padding: 2rem 2rem;
   background: var(--bg-secondary);
 }
 

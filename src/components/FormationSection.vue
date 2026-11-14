@@ -66,7 +66,7 @@ export default {
           institution: 'Instituto Federal do Piauí (IFPI) — Campus Picos',
           description: 'TCC: SisTIRA — Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas',
           advisor: 'Rogério Figueredo de Sousa',
-          coadvisor: 'Rafael Teixeira Anchiêta',
+          coadvisor: 'Rafael Torres Anchiêta',
           status: 'Concluído',
           statusClass: 'done',
         },
@@ -85,7 +85,7 @@ export default {
 
 <style scoped>
 .formation {
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   background: var(--bg-primary);
 }
 

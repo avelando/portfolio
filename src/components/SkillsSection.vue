@@ -21,7 +21,6 @@
             >
               <div class="skill-header">
                 <span class="skill-name">{{ skill.name }}</span>
-                <span class="skill-repos">{{ skill.repos }} repos</span>
               </div>
               <div class="skill-bar">
                 <div
@@ -44,7 +43,7 @@
 
       <p class="skills-note">
         <span class="note-icon">&#9670;</span>
-        Nível baseado na frequência de uso nos repositórios públicos
+        Baseado nos repositórios públicos do GitHub
       </p>
     </div>
   </section>
@@ -63,38 +62,38 @@ export default {
           name: 'Linguagens',
           icon: '&#9654;',
           skills: [
-            { name: 'TypeScript', level: 90, repos: 5, color: 'var(--accent-blue)' },
-            { name: 'Python', level: 85, repos: 3, color: 'var(--accent-yellow)' },
-            { name: 'JavaScript', level: 80, repos: 3, color: 'var(--accent-green)' },
-            { name: 'Java', level: 75, repos: 3, color: 'var(--accent-pink)' },
+            { name: 'TypeScript', level: 90, color: 'var(--accent-blue)' },
+            { name: 'Python', level: 85, color: 'var(--accent-yellow)' },
+            { name: 'JavaScript', level: 80, color: 'var(--accent-green)' },
+            { name: 'Java', level: 75, color: 'var(--accent-pink)' },
           ],
         },
         {
           name: 'Web & Markup',
           icon: '&#9654;',
           skills: [
-            { name: 'HTML', level: 85, repos: 4, color: 'var(--accent-pink)' },
-            { name: 'CSS', level: 80, repos: 3, color: 'var(--accent-blue)' },
-            { name: 'Vue.js', level: 75, repos: 1, color: 'var(--accent-green)' },
-            { name: 'LaTeX / TeX', level: 70, repos: 2, color: 'var(--accent-yellow)' },
+            { name: 'HTML', level: 85, color: 'var(--accent-pink)' },
+            { name: 'CSS', level: 80, color: 'var(--accent-blue)' },
+            { name: 'Vue.js', level: 75, color: 'var(--accent-green)' },
+            { name: 'LaTeX / TeX', level: 70, color: 'var(--accent-yellow)' },
           ],
         },
         {
           name: 'Data Science',
           icon: '&#9654;',
           skills: [
-            { name: 'Jupyter Notebook', level: 80, repos: 3, color: 'var(--accent-purple)' },
-            { name: 'PLN / NLP', level: 85, repos: 4, color: 'var(--accent-blue)' },
-            { name: 'Redes Complexas', level: 70, repos: 2, color: 'var(--accent-green)' },
-            { name: 'RAG', level: 75, repos: 1, color: 'var(--accent-yellow)' },
+            { name: 'Jupyter Notebook', level: 80, color: 'var(--accent-purple)' },
+            { name: 'PLN / NLP', level: 85, color: 'var(--accent-blue)' },
+            { name: 'Redes Complexas', level: 70, color: 'var(--accent-green)' },
+            { name: 'RAG', level: 75, color: 'var(--accent-yellow)' },
           ],
         },
         {
           name: 'Ferramentas',
           icon: '&#9654;',
           skills: [
-            { name: 'Git / GitHub', level: 95, repos: 20, color: 'var(--accent-pink)' },
-            { name: 'Figma', level: 70, repos: 0, color: 'var(--accent-purple)' },
+            { name: 'Git / GitHub', level: 95, color: 'var(--accent-pink)' },
+            { name: 'Figma', level: 70, color: 'var(--accent-purple)' },
           ],
         },
       ],
@@ -105,7 +104,7 @@ export default {
 
 <style scoped>
 .skills {
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   background: var(--bg-secondary);
 }
 
@@ -161,12 +160,6 @@ export default {
 .skill-name {
   font-size: 0.8rem;
   color: var(--text-secondary);
-}
-
-.skill-repos {
-  font-family: var(--font-pixel);
-  font-size: 0.35rem;
-  color: var(--text-muted);
 }
 
 .skill-bar {

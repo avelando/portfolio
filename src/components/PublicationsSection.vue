@@ -186,7 +186,7 @@ export default {
 
 <style scoped>
 .publications {
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   background: var(--bg-primary);
 }
 
