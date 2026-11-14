@@ -108,8 +108,13 @@ export default {
 
 <style scoped>
 .contact {
+  min-height: 100vh;
   padding: 2rem 2rem 0;
+  padding-top: 90px;
   background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {

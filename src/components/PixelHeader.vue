@@ -240,8 +240,13 @@ nav ul li a.active::after {
 
   nav ul li a {
     display: block;
-    padding: 1rem 0.8rem;
-    font-size: 0.6rem;
+    padding: 0.8rem 1rem;
+    font-size: 0.55rem;
+    border-bottom: 1px solid rgba(233, 69, 96, 0.08);
+  }
+
+  nav ul li:last-child a {
+    border-bottom: none;
   }
 }
 </style>

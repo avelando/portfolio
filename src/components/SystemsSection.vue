@@ -86,8 +86,13 @@ export default {
 
 <style scoped>
 .systems {
+  min-height: 100vh;
   padding: 2rem 2rem;
+  padding-top: 90px;
   background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {
@@ -193,6 +198,18 @@ export default {
 @media (max-width: 600px) {
   .systems-grid {
     grid-template-columns: 1fr;
+  }
+
+  .system-card {
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 0.85rem;
+  }
+
+  .card-desc {
+    font-size: 0.75rem;
   }
 }
 </style>

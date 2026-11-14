@@ -66,7 +66,7 @@ export default {
           title: 'SisTIRA — Tutoria Inteligente',
           description: 'Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas. Trabalho de Conclusão de Curso.',
           tag: 'Pesquisa',
-          tagClass: 'research',
+          tagClass: 'tag-research',
           category: 'research',
           period: '2024 - 2025',
         },
@@ -74,7 +74,7 @@ export default {
           title: 'RAG para Documentos Públicos Normativos',
           description: 'Sistema de Recuperação Aumentada por Geração para pergunta e resposta sobre documentos normativos institucionais em português brasileiro.',
           tag: 'Pesquisa',
-          tagClass: 'research',
+          tagClass: 'tag-research',
           category: 'research',
           period: '2025 - 2026',
         },
@@ -82,7 +82,7 @@ export default {
           title: 'INCLUI +IFPI',
           description: 'Projeto de extensão para promoção da inclusão da comunidade surda utilizando esporte como ferramenta de interação.',
           tag: 'Extensão',
-          tagClass: 'extension',
+          tagClass: 'tag-extension',
           category: 'extension',
           period: '2025',
         },
@@ -90,7 +90,7 @@ export default {
           title: 'Programa de Rádio Papo Federal',
           description: 'Programa de rádio semanal na Rádio Cultura FM com entrevistas e discussões para contribuir com a educação e ampliação do universo cultural da comunidade escolar e da população de Picos e região.',
           tag: 'Extensão',
-          tagClass: 'extension',
+          tagClass: 'tag-extension',
           category: 'extension',
           period: '2025',
         },
@@ -111,8 +111,13 @@ export default {
 
 <style scoped>
 .research {
+  min-height: 100vh;
   padding: 2rem 2rem;
+  padding-top: 90px;
   background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {
@@ -180,12 +185,12 @@ export default {
   white-space: nowrap;
 }
 
-.card-tag.research {
+.card-tag.tag-research {
   color: var(--accent-purple);
   border-color: var(--accent-purple);
 }
 
-.card-tag.extension {
+.card-tag.tag-extension {
   color: var(--accent-yellow);
   border-color: var(--accent-yellow);
 }
@@ -246,6 +251,20 @@ export default {
   .project-card {
     flex-direction: column;
     gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .card-title {
+    font-size: 0.85rem;
+  }
+
+  .card-desc {
+    font-size: 0.8rem;
+  }
+
+  .filter-btn {
+    font-size: 0.45rem;
+    padding: 0.5rem 0.8rem;
   }
 }
 </style>

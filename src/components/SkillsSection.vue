@@ -104,8 +104,13 @@ export default {
 
 <style scoped>
 .skills {
+  min-height: 100vh;
   padding: 2rem 2rem;
+  padding-top: 90px;
   background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {

@@ -85,9 +85,14 @@ export default {
 
 <style scoped>
 .about {
+  min-height: 100vh;
   padding: 2rem 2rem;
+  padding-top: 90px;
   background: var(--bg-secondary);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .about::before {
@@ -275,16 +280,39 @@ export default {
   }
 
   .photo-wrapper {
-    width: 130px;
-    height: 130px;
+    width: 120px;
+    height: 120px;
   }
 
   .stats {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.8rem;
   }
 
   .about-card {
-    padding: 1.5rem;
+    padding: 1.2rem;
+  }
+
+  .stat {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+  }
+
+  .line {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    grid-template-columns: 1fr;
   }
 }
 </style>

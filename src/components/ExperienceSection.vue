@@ -87,8 +87,13 @@ export default {
 
 <style scoped>
 .experience {
+  min-height: 100vh;
   padding: 2rem 2rem;
+  padding-top: 90px;
   background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {
@@ -196,13 +201,26 @@ export default {
 @media (max-width: 600px) {
   .exp-card {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.8rem;
+    padding: 1.2rem;
   }
 
   .exp-icon {
     width: 40px;
     height: 40px;
     font-size: 1.5rem;
+  }
+
+  .exp-title {
+    font-size: 0.9rem;
+  }
+
+  .exp-org {
+    font-size: 0.8rem;
+  }
+
+  .exp-desc {
+    font-size: 0.8rem;
   }
 }
 </style>

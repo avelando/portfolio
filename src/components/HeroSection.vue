@@ -406,9 +406,29 @@ export default {
     font-size: 1.2rem;
   }
 
+  .greeting {
+    font-size: 0.6rem;
+  }
+
+  .role-wrapper {
+    font-size: 0.55rem;
+  }
+
+  .description {
+    font-size: 0.9rem;
+  }
+
   .hero-buttons {
     flex-direction: column;
     align-items: center;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    width: 100%;
+    justify-content: center;
   }
 }
 </style>

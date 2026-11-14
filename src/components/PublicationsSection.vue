@@ -26,7 +26,23 @@
           <div class="pub-content">
             <span :class="['pub-type', pub.typeClass]">{{ pub.type }}</span>
             <h3 class="pub-title">{{ pub.title }}</h3>
-            <p class="pub-authors">{{ pub.authors }}</p>
+            <p class="pub-authors">
+              <template v-for="(authorId, i) in pub.authorIds" :key="authorId">
+                <template v-if="i > 0">; </template>
+                <a
+                  v-if="getAuthor(authorId) && getAuthor(authorId).lattes"
+                  :href="getAuthor(authorId).lattes"
+                  target="_blank"
+                  rel="noopener"
+                  :class="['author-link', { highlighted: getAuthor(authorId).highlighted }]"
+                >{{ getAuthor(authorId).name }}</a>
+                <span
+                  v-else-if="getAuthor(authorId)"
+                  :class="{ 'author-highlighted': getAuthor(authorId).highlighted }"
+                >{{ getAuthor(authorId).name }}</span>
+                <span v-else>{{ authorId }}</span>
+              </template>
+            </p>
             <p class="pub-venue">
               <span class="venue-icon">&#9830;</span>
               {{ pub.venue }}
@@ -61,7 +77,23 @@
           <div class="patent-card" v-for="(patent, i) in patents" :key="i">
             <span class="patent-reg">{{ patent.registration }}</span>
             <h4 class="patent-name">{{ patent.name }}</h4>
-            <p class="patent-authors">{{ patent.authors }}</p>
+            <p class="patent-authors">
+              <template v-for="(authorId, j) in patent.authorIds" :key="authorId">
+                <template v-if="j > 0">; </template>
+                <a
+                  v-if="getAuthor(authorId) && getAuthor(authorId).lattes"
+                  :href="getAuthor(authorId).lattes"
+                  target="_blank"
+                  rel="noopener"
+                  :class="['author-link', { highlighted: getAuthor(authorId).highlighted }]"
+                >{{ getAuthor(authorId).name }}</a>
+                <span
+                  v-else-if="getAuthor(authorId)"
+                  :class="{ 'author-highlighted': getAuthor(authorId).highlighted }"
+                >{{ getAuthor(authorId).name }}</span>
+                <span v-else>{{ authorId }}</span>
+              </template>
+            </p>
             <p class="patent-date">Registro: {{ patent.date }}</p>
           </div>
         </div>
@@ -72,6 +104,8 @@
 
 <script>
 import SectionTitle from './SectionTitle.vue';
+import authors from '@/data/authors';
+import { publications, patents } from '@/data/publications';
 
 export default {
   name: 'PublicationsSection',
@@ -86,90 +120,9 @@ export default {
         { label: 'Completos', value: 'full' },
         { label: 'Resumos', value: 'abstract' },
       ],
-      publications: [
-        {
-          title: 'Extending an Ensemble Baseline with Corpus-Based Graph Features for Portuguese Pun Detection',
-          authors: 'SOUSA, A. R.; SOUSA, C. S.; BARROS, C. H. S.; ANCHIÉTA, R. T.',
-          venue: '17th International Conference on Computational Processing of Portuguese (PROPOR 2026), Salvador/BA',
-          year: '2026',
-          pages: '759-769',
-          type: 'Completo',
-          typeClass: 'full',
-          category: 'full',
-        },
-        {
-          title: 'Retrieval-Augmented Generation for Question Answering over Brazilian Portuguese Institutional Normative Documents',
-          authors: 'DE SOUSA, A. R.; SOUSA, J. C. R.; CARVALHO, K.; MEDEIROS, M. M. P.; MOURA, M. R.',
-          venue: 'XXIII Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2026), Cuiabá',
-          year: '2026',
-          type: 'Completo',
-          typeClass: 'full',
-          category: 'full',
-        },
-        {
-          title: 'Comparative Evaluation of Local and Quasi-Local Topological Methods for Link Prediction in Complex Networks',
-          authors: 'SOUSA, A. R.; FERREIRA, M. W. S.',
-          venue: 'XIV Symposium on Knowledge Discovery, Mining and Learning (KDMiLe 2026)',
-          year: '2026',
-          pages: '97-104',
-          type: 'Completo',
-          typeClass: 'full',
-          category: 'full',
-        },
-        {
-          title: 'When the Split Matters: Reorganizing Micro-Edited Pairs for Portuguese Pun Detection',
-          authors: 'DE SOUSA, A. R.; FERREIRA, M. W. S.; PONTES, V. O. L.; ANCHIÉTA, R. T.',
-          venue: 'XXIII Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2026), Cuiabá',
-          year: '2026',
-          type: 'Completo',
-          typeClass: 'full',
-          category: 'full',
-        },
-        {
-          title: 'Usabilidade e Engajamento em Jogos Casuais Diários: Estudo de Caso do Guess Of Dreams',
-          authors: 'DE SOUSA, A. R.; BARROS, C. H. S.; SOUSA, C. S.',
-          venue: 'XIII Escola Regional de Informática de Goiás (ERI-GO 2025)',
-          year: '2025',
-          pages: '1-10',
-          type: 'Completo',
-          typeClass: 'full',
-          category: 'full',
-        },
-        {
-          title: 'SisTIRA: Plataforma Web de Tutoria Inteligente para Avaliação Automática de Respostas Discursivas',
-          authors: 'SOUSA, A. R.; ANCHIÉTA, R. T.',
-          venue: 'XVI Simpósio Brasileiro de Tecnologia da Informação e da Linguagem Humana (STIL 2025)',
-          year: '2025',
-          pages: '733-737',
-          type: 'Resumo expandido',
-          typeClass: 'abstract',
-          category: 'abstract',
-        },
-        {
-          title: 'Usabilidade e Engajamento em Jogos Casuais Diários: Estudo de Caso do Guess Of Dreams',
-          authors: 'DE SOUSA, A. R.; SOUSA, C. S.; BARROS, C. H. S.',
-          venue: 'XIII Escola Regional de Informática de Goiás (ERI-GO 2025)',
-          year: '2025',
-          pages: '335-338',
-          type: 'Resumo expandido',
-          typeClass: 'abstract',
-          category: 'abstract',
-        },
-      ],
-      patents: [
-        {
-          registration: 'BR512025004679-0',
-          name: 'SisTIRA — Sistema de Tutoria Inteligente de Respostas Automáticas',
-          authors: 'SOUSA, A. R.; ANCHIÉTA, R. T.',
-          date: '24/09/2025',
-        },
-        {
-          registration: 'BR512026001585-5',
-          name: 'Wordle of Dreams',
-          authors: 'SOUSA, A. R.; SOUSA, C. S.; BARROS, C. H. S.; SOUSA, R. F.',
-          date: '22/08/2025',
-        },
-      ],
+      publications,
+      patents,
+      authors,
     };
   },
   computed: {
@@ -181,12 +134,19 @@ export default {
       return this.showAllPubs ? this.filteredPubs : this.filteredPubs.slice(0, this.initialCount);
     },
   },
+  methods: {
+    getAuthor(id) {
+      return this.authors[id] || null;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .publications {
+  min-height: 100vh;
   padding: 2rem 2rem;
+  padding-top: 90px;
   background: var(--bg-primary);
 }
 
@@ -285,6 +245,34 @@ export default {
   font-size: 0.8rem;
   color: var(--text-secondary);
   margin-bottom: 0.3rem;
+  line-height: 1.6;
+}
+
+.author-link {
+  color: var(--accent-blue);
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition: all 0.3s ease;
+}
+
+.author-link:hover {
+  border-bottom-color: var(--accent-blue);
+  color: var(--accent-blue);
+}
+
+.author-link.highlighted {
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+.author-link.highlighted:hover {
+  border-bottom-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.author-highlighted {
+  color: var(--accent-green);
+  font-weight: 600;
 }
 
 .pub-venue {
@@ -378,7 +366,7 @@ export default {
 
 .patent-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
   gap: 1.2rem;
 }
 
@@ -411,6 +399,7 @@ export default {
   font-size: 0.8rem;
   color: var(--text-secondary);
   margin-bottom: 0.3rem;
+  line-height: 1.6;
 }
 
 .patent-date {
@@ -422,10 +411,32 @@ export default {
   .pub-card {
     flex-direction: column;
     gap: 0.8rem;
+    padding: 1rem;
+  }
+
+  .pub-title {
+    font-size: 0.85rem;
+  }
+
+  .pub-authors {
+    font-size: 0.75rem;
+  }
+
+  .pub-venue {
+    font-size: 0.75rem;
   }
 
   .patent-cards {
     grid-template-columns: 1fr;
+  }
+
+  .patent-card {
+    padding: 1.2rem;
+  }
+
+  .filter-btn {
+    font-size: 0.45rem;
+    padding: 0.5rem 0.8rem;
   }
 }
 </style>

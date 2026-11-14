@@ -85,8 +85,13 @@ export default {
 
 <style scoped>
 .formation {
+  min-height: 100vh;
   padding: 2rem 2rem;
+  padding-top: 90px;
   background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .container {
@@ -243,6 +248,37 @@ export default {
 
   .timeline-dot {
     left: 20px;
+  }
+
+  .timeline-card {
+    padding: 1.2rem;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .institution {
+    font-size: 0.8rem;
+  }
+
+  .card-description {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-item.left,
+  .timeline-item.right {
+    padding-left: 45px;
+  }
+
+  .period {
+    font-size: 0.5rem;
+  }
+
+  .status {
+    font-size: 0.4rem;
   }
 }
 </style>
